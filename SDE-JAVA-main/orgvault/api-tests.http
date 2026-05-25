@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:8080/api/backups
+
+### Health check: get all backups
+GET {{baseUrl}}
+
+### Create backup
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "fileName": "AccountTrigger.cls",
+  "fileType": "APEX",
+  "orgName": "SalesOrg_Production"
+}
+
+### Create another backup
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "fileName": "Opportunity.workflow",
+  "fileType": "WORKFLOW",
+  "orgName": "SalesOrg_Sandbox"
+}
+
+### Get stats
+GET {{baseUrl}}/stats
+
+### Filter by org name
+GET {{baseUrl}}/org/SalesOrg_Production
+
+### Filter by status
+GET {{baseUrl}}/status/ACTIVE
+
+### Filter by file type
+GET {{baseUrl}}/type/APEX
+
+### Restore backup by id
+PUT {{baseUrl}}/1/status?status=RESTORED
+
+### Delete backup by id
+DELETE {{baseUrl}}/1
